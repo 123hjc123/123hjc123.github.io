@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --paper: 42 33% 93%;          /* 宣纸 #f2efeb 系 */
+    --paper-warm: 40 30% 90%;
+    --ink: 0 0% 7%;               /* 墨 #121212 */
+    --ink-soft: 0 0% 16%;
+    --ink-3: 30 6% 42%;           /* 淡墨 */
+    --cinnabar: 0 100% 38%;       /* 朱砂 #c00000 */
+    --cinnabar-bright: 355 98% 47%;
+    --line: 35 12% 80%;
+
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: 42 33% 93%;
+    --card-foreground: var(--ink);
+    --popover: var(--paper);
+    --popover-foreground: var(--ink);
+    --primary: var(--cinnabar);
+    --primary-foreground: 42 33% 93%;
+    --secondary: 40 20% 88%;
+    --secondary-foreground: var(--ink);
+    --muted: 40 16% 88%;
+    --muted-foreground: var(--ink-3);
+    --accent: 40 20% 88%;
+    --accent-foreground: var(--ink);
+    --destructive: 0 84% 40%;
+    --destructive-foreground: 42 33% 93%;
+    --border: var(--line);
+    --input: var(--line);
+    --ring: var(--cinnabar);
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .font-brush { font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif; }
+  .font-song { font-family: 'Noto Serif SC', 'Songti SC', serif; }
+  .font-mono-num { font-family: 'IBM Plex Mono', 'Noto Sans SC', monospace; }
+
+  .paper-bg {
+    background-color: hsl(var(--paper));
+    background-image:
+      linear-gradient(hsl(var(--line) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--line) / 0.35) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+  .ink-bg {
+    background-color: hsl(var(--ink));
+    background-image:
+      linear-gradient(hsl(42 33% 93% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(42 33% 93% / 0.05) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+  .vertical-text {
+    writing-mode: vertical-rl;
+    letter-spacing: 0.35em;
+  }
+  .text-balance { text-wrap: balance; }
+}
+
+/* 朱砂印章 */
+.seal {
+  font-family: 'Ma Shan Zheng', 'Noto Serif SC', serif;
+  background: hsl(var(--cinnabar));
+  color: hsl(var(--paper));
+  box-shadow: inset 0 0 0 2px hsl(var(--paper) / 0.85), inset 0 0 0 4px hsl(var(--cinnabar));
+}
+
+/*  marquee  */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+/* 滚动显现 */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+::selection { background: hsl(var(--cinnabar)); color: hsl(var(--paper)); }
